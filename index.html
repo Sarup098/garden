@@ -150,11 +150,18 @@
             <a href="#contact" class="hover:opacity-60 transition-opacity duration-300">Visit</a>
         </div>
 
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden z-50 relative focus:outline-none hover:opacity-60 transition-opacity">
-            <span class="block w-6 h-[1px] bg-current mb-1.5"></span>
-            <span class="block w-6 h-[1px] bg-current"></span>
-        </button>
+        <!-- Mobile Right Side Controls -->
+        <div class="md:hidden z-50 relative flex items-center gap-3">
+            <a href="https://wa.me/919876543210?text=Hello%2C%20I%20would%20like%20to%20make%20an%20inquiry%20for%20Luing%20Garden." target="_blank" rel="noopener noreferrer" class="bg-[#25D366] text-white px-2.5 py-1.5 rounded-md text-[9px] uppercase tracking-widest font-semibold flex items-center gap-1.5">
+                <i class="fa-brands fa-whatsapp text-[12px]"></i>
+                <span>Talk on WhatsApp</span>
+            </a>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="focus:outline-none hover:opacity-60 transition-opacity">
+                <span class="block w-6 h-[1px] bg-current mb-1.5"></span>
+                <span class="block w-6 h-[1px] bg-current"></span>
+            </button>
+        </div>
     </nav>
 
     <!-- Full Screen Mobile Menu -->
@@ -191,7 +198,8 @@
         </div>
 
         <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 text-white flex flex-col items-center reveal active" style="transition-delay: 600ms;">
-            <span class="text-[10px] uppercase tracking-widest mb-4">Scroll</span>
+            <!-- Added pl-[0.25em] to perfectly balance the letter-spacing offset -->
+            <span class="text-[10px] uppercase tracking-widest pl-[0.25em] mb-4">Scroll</span>
             <div class="w-[1px] h-12 bg-white/50 relative overflow-hidden">
                 <div class="w-full h-full bg-white absolute top-0 left-0 animate-[scrollLine_2s_ease-in-out_infinite]"></div>
             </div>
@@ -229,9 +237,9 @@
     <section id="estate" class="py-20 px-6 md:px-12 bg-stone-50">
         <div class="max-w-7xl mx-auto">
             
-            <div class="flex flex-col md:flex-row items-center gap-16 md:gap-24 mb-32">
+            <div class="flex flex-col md:flex-row items-center gap-10 md:gap-24 mb-20 md:mb-32">
                 <div class="w-full md:w-1/2 reveal img-zoom-container">
-                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/1.jpg" alt="Lush Gardens" class="w-full h-[600px] object-cover img-zoom">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/1.jpg" alt="Lush Gardens" class="w-full h-[300px] md:h-[600px] object-cover img-zoom">
                 </div>
                 <div class="w-full md:w-1/2 reveal">
                     <span class="text-sage text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">The Grounds</span>
@@ -244,9 +252,9 @@
                 </div>
             </div>
 
-            <div class="flex flex-col md:flex-row-reverse items-center gap-16 md:gap-24">
+            <div class="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-24">
                 <div class="w-full md:w-1/2 reveal img-zoom-container">
-                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/2.jpg" alt="Family Setting" class="w-full h-[600px] object-cover img-zoom">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/2.jpg" alt="Family Setting" class="w-full h-[300px] md:h-[600px] object-cover img-zoom">
                 </div>
                 <div class="w-full md:w-1/2 reveal">
                     <span class="text-sage text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">For Everyone</span>
@@ -276,37 +284,37 @@
             </div>
             
             <!-- 3 Uniform Columns: Photo + Text -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 reveal">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-12 reveal">
                 <!-- Item 1 -->
-                <div class="flex flex-col group">
-                    <div class="img-zoom-container aspect-[4/5] w-full mb-8">
+                <div class="flex flex-col items-center group">
+                    <div class="img-zoom-container aspect-square md:aspect-[4/5] w-full max-w-[260px] md:max-w-none mb-6 md:mb-8">
                         <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/7%20pizza.jpg" alt="Artisan Pizza" class="w-full h-full object-cover img-zoom">
                     </div>
                     <div class="text-center px-4">
-                        <h4 class="font-serif text-2xl text-stone-900 mb-3 group-hover:text-sage transition-colors">Artisan Pizza</h4>
-                        <p class="font-light text-stone-500 text-sm leading-relaxed">Crispy, thin crusts baked to perfection with generous, locally-sourced toppings.</p>
+                        <h4 class="font-serif text-2xl text-stone-900 mb-2 md:mb-3 group-hover:text-sage transition-colors">Artisan Pizza</h4>
+                        <p class="font-light text-stone-500 text-sm leading-relaxed max-w-[260px] md:max-w-none">Crispy, thin crusts baked to perfection with generous, locally-sourced toppings.</p>
                     </div>
                 </div>
 
                 <!-- Item 2 -->
-                <div class="flex flex-col group">
-                    <div class="img-zoom-container aspect-[4/5] w-full mb-8">
+                <div class="flex flex-col items-center group">
+                    <div class="img-zoom-container aspect-square md:aspect-[4/5] w-full max-w-[260px] md:max-w-none mb-6 md:mb-8">
                         <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/8%20thali.jpg" alt="Traditional Thali" class="w-full h-full object-cover img-zoom">
                     </div>
                     <div class="text-center px-4">
-                        <h4 class="font-serif text-2xl text-stone-900 mb-3 group-hover:text-sage transition-colors">Traditional Thali</h4>
-                        <p class="font-light text-stone-500 text-sm leading-relaxed">Hearty, flavorful authentic thalis crafted to satisfy the most discerning palate.</p>
+                        <h4 class="font-serif text-2xl text-stone-900 mb-2 md:mb-3 group-hover:text-sage transition-colors">Traditional Thali</h4>
+                        <p class="font-light text-stone-500 text-sm leading-relaxed max-w-[260px] md:max-w-none">Hearty, flavorful authentic thalis crafted to satisfy the most discerning palate.</p>
                     </div>
                 </div>
 
                 <!-- Item 3 -->
-                <div class="flex flex-col group">
-                    <div class="img-zoom-container aspect-[4/5] w-full mb-8">
+                <div class="flex flex-col items-center group">
+                    <div class="img-zoom-container aspect-square md:aspect-[4/5] w-full max-w-[260px] md:max-w-none mb-6 md:mb-8">
                         <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/6.%20juice.jpg" alt="Fresh Juices" class="w-full h-full object-cover img-zoom">
                     </div>
                     <div class="text-center px-4">
-                        <h4 class="font-serif text-2xl text-stone-900 mb-3 group-hover:text-sage transition-colors">Fresh Juices</h4>
-                        <p class="font-light text-stone-500 text-sm leading-relaxed">Vibrant fresh juices and our famous peach iced tea, perfect for a sunny afternoon.</p>
+                        <h4 class="font-serif text-2xl text-stone-900 mb-2 md:mb-3 group-hover:text-sage transition-colors">Fresh Juices</h4>
+                        <p class="font-light text-stone-500 text-sm leading-relaxed max-w-[260px] md:max-w-none">Vibrant fresh juices and our famous peach iced tea, perfect for a sunny afternoon.</p>
                     </div>
                 </div>
             </div>
@@ -422,7 +430,7 @@
 
                 <!-- Map Area -->
                 <div class="w-full md:w-2/3">
-                    <div class="w-full h-[350px] md:h-[450px] grayscale-[30%] hover:grayscale-0 transition-all duration-700 shadow-sm border border-stone-200">
+                    <div class="w-full h-[250px] md:h-[450px] grayscale-[30%] hover:grayscale-0 transition-all duration-700 shadow-sm border border-stone-200">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3543.8539966584553!2d88.5968104!3d27.3490327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e6a50a903340c9%3A0xeb81f5de11f23723!2sLuing%20Garden!5e0!3m2!1sen!2sin!4v1780729891318!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
@@ -481,10 +489,10 @@
         </div>
     </footer>
 
-    <!-- WhatsApp Floating Action Button -->
-    <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white px-5 py-4 md:py-3 rounded-full shadow-[0_10px_40px_rgba(37,211,102,0.4)] flex items-center gap-3 hover:-translate-y-1 hover:shadow-[0_15px_50px_rgba(37,211,102,0.6)] transition-all duration-300">
-        <i class="fa-brands fa-whatsapp text-2xl md:text-xl"></i>
-        <span class="font-sans text-xs uppercase tracking-widest font-semibold hidden md:inline">Inquire</span>
+    <!-- WhatsApp Floating Action Button (Desktop Only) -->
+    <a href="https://wa.me/919876543210?text=Hello%2C%20I%20would%20like%20to%20make%20an%20inquiry%20for%20Luing%20Garden." target="_blank" rel="noopener noreferrer" class="hidden md:flex fixed bottom-6 right-6 z-50 bg-[#25D366] text-white px-5 py-3 rounded-full shadow-[0_10px_40px_rgba(37,211,102,0.4)] items-center gap-3 hover:-translate-y-1 hover:shadow-[0_15px_50px_rgba(37,211,102,0.6)] transition-all duration-300">
+        <i class="fa-brands fa-whatsapp text-xl"></i>
+        <span class="font-sans text-xs uppercase tracking-widest font-semibold">Inquire</span>
     </a>
 
     <!-- Scripts -->
