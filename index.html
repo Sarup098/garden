@@ -1,1 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luing Garden | Minimalist & Premium</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cormorant Garamond for elegant Serif, Montserrat for clean Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        stone: {
+                            50: '#FDFCFB', // Very warm, premium white
+                            100: '#F5F4F0',
+                            800: '#2C2B29', // Deep charcoal
+                            900: '#1A1A19',
+                        },
+                        sage: {
+                            DEFAULT: '#7A8B76', // Muted, sophisticated green
+                            light: '#A3B19E'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        widest: '.25em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FDFCFB;
+            color: #1A1A19;
+            overflow-x: hidden;
+        }
+
+        /* Minimalist Navigation */
+        .nav-scrolled {
+            background-color: rgba(253, 252, 251, 0.98);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Premium Fade Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Image treatment */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom {
+            transition: transform 1.5s ease;
+        }
+        .img-zoom-container:hover .img-zoom {
+            transform: scale(1.05);
+        }
+
+        /* Subtle lines */
+        .hairline {
+            height: 1px;
+            background-color: currentColor;
+            opacity: 0.15;
+        }
+
+        /* Hero Slideshow */
+        .slideshow-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            animation: crossfade 12s infinite ease-in-out;
+        }
+        /* Stagger the 4 images (3s each = 12s total loop) */
+        .slideshow-img:nth-child(1) { animation-delay: 0s; }
+        .slideshow-img:nth-child(2) { animation-delay: 3s; }
+        .slideshow-img:nth-child(3) { animation-delay: 6s; }
+        .slideshow-img:nth-child(4) { animation-delay: 9s; }
+        
+        @keyframes crossfade {
+            0%, 100% { opacity: 0; }
+            8%, 25% { opacity: 1; }
+            33% { opacity: 0; }
+        }
+
+        /* Continuous Marquee */
+        .marquee-container {
+            display: flex;
+            width: 100vw;
+        }
+        .marquee-track {
+            display: flex;
+            gap: 2rem;
+            padding-right: 2rem;
+            animation: marquee 35s linear infinite;
+            will-change: transform;
+        }
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-sage selection:text-white">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-700 pt-6 pb-6 px-6 md:px-12 flex justify-between items-center mix-blend-difference text-white">
+        <!-- Logo -->
+        <a href="#" class="z-50 relative flex items-center">
+            <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/logo.png" alt="Luing Garden Logo" class="h-8 md:h-10 w-auto object-contain">
+        </a>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex space-x-12 text-xs font-medium tracking-widest uppercase">
+            <a href="#estate" class="hover:opacity-60 transition-opacity duration-300">The Estate</a>
+            <a href="#dining" class="hover:opacity-60 transition-opacity duration-300">Dining</a>
+            <a href="#gallery" class="hover:opacity-60 transition-opacity duration-300">Gallery</a>
+            <a href="#events" class="hover:opacity-60 transition-opacity duration-300">Events</a>
+            <a href="#contact" class="hover:opacity-60 transition-opacity duration-300">Visit</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" class="md:hidden z-50 relative focus:outline-none hover:opacity-60 transition-opacity">
+            <span class="block w-6 h-[1px] bg-current mb-1.5"></span>
+            <span class="block w-6 h-[1px] bg-current"></span>
+        </button>
+    </nav>
+
+    <!-- Full Screen Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-stone-50 z-40 flex flex-col justify-center items-center opacity-0 pointer-events-none transition-opacity duration-500 text-stone-900">
+        <div class="flex flex-col space-y-8 text-center">
+            <a href="#estate" class="mobile-link font-serif text-4xl hover:text-sage transition-colors">The Estate</a>
+            <a href="#dining" class="mobile-link font-serif text-4xl hover:text-sage transition-colors">Dining</a>
+            <a href="#gallery" class="mobile-link font-serif text-4xl hover:text-sage transition-colors">Gallery</a>
+            <a href="#events" class="mobile-link font-serif text-4xl hover:text-sage transition-colors">Events</a>
+            <a href="#contact" class="mobile-link font-serif text-4xl hover:text-sage transition-colors">Visit</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen w-full flex items-center justify-center">
+        <!-- High-end subtle dark overlay with 10% opacity slideshow -->
+        <div class="absolute inset-0 z-0 bg-stone-900">
+            <div class="relative w-full h-full opacity-10">
+                <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/1.jpg" alt="Luing Garden Atmosphere" class="slideshow-img">
+                <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/2.jpg" alt="Luing Garden Atmosphere" class="slideshow-img">
+                <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/4.jpg" alt="Luing Garden Atmosphere" class="slideshow-img">
+                <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/5.jpg" alt="Luing Garden Atmosphere" class="slideshow-img">
+            </div>
+        </div>
+
+        <div class="relative z-10 text-center text-white px-4 flex flex-col items-center">
+            <span class="uppercase tracking-[0.3em] text-xs mb-6 block font-light reveal active">Gangtok, Sikkim</span>
+            <h1 class="text-6xl md:text-8xl font-serif font-light tracking-wide mb-8 reveal active" style="transition-delay: 200ms;">
+                Luing Garden
+            </h1>
+            <p class="font-sans font-light text-sm md:text-base tracking-widest uppercase max-w-lg mx-auto reveal active" style="transition-delay: 400ms;">
+                A Sanctuary of Nature & Culinary Craftsmanship
+            </p>
+        </div>
+
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 text-white flex flex-col items-center reveal active" style="transition-delay: 600ms;">
+            <span class="text-[10px] uppercase tracking-widest mb-4">Scroll</span>
+            <div class="w-[1px] h-12 bg-white/50 relative overflow-hidden">
+                <div class="w-full h-full bg-white absolute top-0 left-0 animate-[scrollLine_2s_ease-in-out_infinite]"></div>
+            </div>
+        </div>
+    </header>
+
+    <style>
+        @keyframes scrollLine {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+    </style>
+
+    <!-- Philosophy / Intro -->
+    <section class="py-32 md:py-48 px-6 md:px-12 bg-stone-50 text-stone-900 text-center">
+        <div class="max-w-4xl mx-auto reveal">
+            <i class="fa-solid fa-leaf text-sage/30 text-2xl mb-8 block"></i>
+            <h2 class="text-3xl md:text-5xl font-serif leading-tight mb-8 font-light text-stone-800">
+                "An escape from the ordinary. Where sprawling landscapes meet impeccable hospitality, creating moments that linger long after you leave."
+            </h2>
+            <div class="flex items-center justify-center space-x-2 mt-12 text-sage">
+                <i class="fa-solid fa-star text-xs"></i>
+                <i class="fa-solid fa-star text-xs"></i>
+                <i class="fa-solid fa-star text-xs"></i>
+                <i class="fa-solid fa-star text-xs"></i>
+                <i class="fa-solid fa-star text-xs"></i>
+                <span class="text-stone-500 text-xs tracking-widest font-sans ml-3 uppercase">Rated 4.2 by 500+ Guests</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Estate (Features) -->
+    <section id="estate" class="py-20 px-6 md:px-12 bg-stone-50">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row items-center gap-16 md:gap-24 mb-32">
+                <div class="w-full md:w-1/2 reveal img-zoom-container">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/1.jpg" alt="Lush Gardens" class="w-full h-[600px] object-cover img-zoom">
+                </div>
+                <div class="w-full md:w-1/2 reveal">
+                    <span class="text-sage text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">The Grounds</span>
+                    <h3 class="text-4xl md:text-5xl font-serif mb-6 text-stone-900">Botanical Elegance</h3>
+                    <div class="hairline w-12 mb-6"></div>
+                    <p class="text-stone-600 font-light leading-relaxed mb-8 text-lg">
+                        Step into a realm of natural tranquility. Our meticulously curated gardens offer a refreshing contrast to city life. expansive green spaces provide the perfect canvas for photography, quiet contemplation, or afternoon strolls.
+                    </p>
+                    <a href="#contact" class="inline-block border-b border-stone-900 pb-1 text-sm uppercase tracking-widest hover:text-sage hover:border-sage transition-colors">Explore the Estate</a>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row-reverse items-center gap-16 md:gap-24">
+                <div class="w-full md:w-1/2 reveal img-zoom-container">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/2.jpg" alt="Family Setting" class="w-full h-[600px] object-cover img-zoom">
+                </div>
+                <div class="w-full md:w-1/2 reveal">
+                    <span class="text-sage text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">For Everyone</span>
+                    <h3 class="text-4xl md:text-5xl font-serif mb-6 text-stone-900">Generations Together</h3>
+                    <div class="hairline w-12 mb-6"></div>
+                    <p class="text-stone-600 font-light leading-relaxed mb-8 text-lg">
+                        Designed with families in mind. Safe, spacious environments featuring dedicated play areas allow children to explore freely, while parents enjoy uninterrupted moments of relaxation in our comfortable, open-air seating.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Dining -->
+    <section id="dining" class="py-32 bg-stone-100 px-6 md:px-12 relative overflow-hidden">
+        <!-- Decorative element -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-stone-200/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 z-0"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            
+            <!-- Heading Block -->
+            <div class="text-center reveal mb-16">
+                <span class="text-sage text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">Culinary</span>
+                <h2 class="text-5xl font-serif text-stone-900 mb-6">Taste the Freshness</h2>
+                <div class="hairline w-16 mx-auto bg-stone-900"></div>
+            </div>
+            
+            <!-- 3 Uniform Columns: Photo + Text -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 reveal">
+                <!-- Item 1 -->
+                <div class="flex flex-col group">
+                    <div class="img-zoom-container aspect-[4/5] w-full mb-8">
+                        <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/7%20pizza.jpg" alt="Artisan Pizza" class="w-full h-full object-cover img-zoom">
+                    </div>
+                    <div class="text-center px-4">
+                        <h4 class="font-serif text-2xl text-stone-900 mb-3 group-hover:text-sage transition-colors">Artisan Pizza</h4>
+                        <p class="font-light text-stone-500 text-sm leading-relaxed">Crispy, thin crusts baked to perfection with generous, locally-sourced toppings.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="flex flex-col group">
+                    <div class="img-zoom-container aspect-[4/5] w-full mb-8">
+                        <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/8%20thali.jpg" alt="Traditional Thali" class="w-full h-full object-cover img-zoom">
+                    </div>
+                    <div class="text-center px-4">
+                        <h4 class="font-serif text-2xl text-stone-900 mb-3 group-hover:text-sage transition-colors">Traditional Thali</h4>
+                        <p class="font-light text-stone-500 text-sm leading-relaxed">Hearty, flavorful authentic thalis crafted to satisfy the most discerning palate.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="flex flex-col group">
+                    <div class="img-zoom-container aspect-[4/5] w-full mb-8">
+                        <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/6.%20juice.jpg" alt="Fresh Juices" class="w-full h-full object-cover img-zoom">
+                    </div>
+                    <div class="text-center px-4">
+                        <h4 class="font-serif text-2xl text-stone-900 mb-3 group-hover:text-sage transition-colors">Fresh Juices</h4>
+                        <p class="font-light text-stone-500 text-sm leading-relaxed">Vibrant fresh juices and our famous peach iced tea, perfect for a sunny afternoon.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Gallery / Moments Section -->
+    <section id="gallery" class="py-32 bg-stone-50 border-t border-stone-200 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="text-center mb-24 reveal">
+                <span class="text-sage text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">Visual Journey</span>
+                <h2 class="text-5xl font-serif text-stone-900">Glimpses of Luing</h2>
+                <div class="hairline w-16 mx-auto mt-8 bg-stone-900"></div>
+            </div>
+        </div>
+            
+        <!-- Infinite Scrolling Rail -->
+        <div class="marquee-container reveal">
+            <!-- Track 1 -->
+            <div class="marquee-track">
+                <div class="w-[300px] md:w-[450px] shrink-0 img-zoom-container aspect-[3/4] group cursor-pointer">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/1.jpg" alt="Luing Garden Atmosphere" class="w-full h-full object-cover img-zoom grayscale-[20%] group-hover:grayscale-0 transition-all duration-700">
+                </div>
+                <div class="w-[300px] md:w-[450px] shrink-0 img-zoom-container aspect-[3/4] group cursor-pointer">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/2.jpg" alt="Luing Garden Detail" class="w-full h-full object-cover img-zoom grayscale-[20%] group-hover:grayscale-0 transition-all duration-700">
+                </div>
+                <div class="w-[300px] md:w-[450px] shrink-0 img-zoom-container aspect-[3/4] group cursor-pointer">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/4.jpg" alt="Luing Garden Events" class="w-full h-full object-cover img-zoom grayscale-[20%] group-hover:grayscale-0 transition-all duration-700">
+                </div>
+                <div class="w-[300px] md:w-[450px] shrink-0 img-zoom-container aspect-[3/4] group cursor-pointer">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/5.jpg" alt="Luing Garden Pool" class="w-full h-full object-cover img-zoom grayscale-[20%] group-hover:grayscale-0 transition-all duration-700">
+                </div>
+            </div>
+            
+            <!-- Track 2 (Duplicate for seamless loop) -->
+            <div class="marquee-track" aria-hidden="true">
+                <div class="w-[300px] md:w-[450px] shrink-0 img-zoom-container aspect-[3/4] group cursor-pointer">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/1.jpg" alt="Luing Garden Atmosphere" class="w-full h-full object-cover img-zoom grayscale-[20%] group-hover:grayscale-0 transition-all duration-700">
+                </div>
+                <div class="w-[300px] md:w-[450px] shrink-0 img-zoom-container aspect-[3/4] group cursor-pointer">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/2.jpg" alt="Luing Garden Detail" class="w-full h-full object-cover img-zoom grayscale-[20%] group-hover:grayscale-0 transition-all duration-700">
+                </div>
+                <div class="w-[300px] md:w-[450px] shrink-0 img-zoom-container aspect-[3/4] group cursor-pointer">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/4.jpg" alt="Luing Garden Events" class="w-full h-full object-cover img-zoom grayscale-[20%] group-hover:grayscale-0 transition-all duration-700">
+                </div>
+                <div class="w-[300px] md:w-[450px] shrink-0 img-zoom-container aspect-[3/4] group cursor-pointer">
+                    <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/5.jpg" alt="Luing Garden Pool" class="w-full h-full object-cover img-zoom grayscale-[20%] group-hover:grayscale-0 transition-all duration-700">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events -->
+    <section id="events" class="relative py-32 md:py-48 bg-stone-900 text-stone-50 px-6 md:px-12 flex items-center justify-center min-h-[80vh]">
+        <div class="absolute inset-0 z-0">
+            <img src="https://raw.githubusercontent.com/Sarup098/garden/main/photos/4.jpg" alt="Event Venue" class="w-full h-full object-cover opacity-30">
+        </div>
+        
+        <div class="relative z-10 max-w-3xl mx-auto text-center reveal">
+            <span class="text-sage-light text-xs font-semibold tracking-[0.2em] uppercase mb-6 block">The Venue</span>
+            <h2 class="text-5xl md:text-7xl font-serif mb-8 font-light">Unforgettable Occasions</h2>
+            <div class="hairline w-16 mx-auto mb-8 bg-stone-50"></div>
+            <p class="font-light leading-relaxed mb-12 text-lg text-stone-300">
+                From intimate garden weddings to grand corporate galas, our expansive lawns provide a prestigious, open-air canvas. Paired with our dedicated management and exemplary service, your event will be executed flawlessly.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-8 mb-12 text-sm uppercase tracking-widest font-medium">
+                <span>Weddings</span>
+                <span class="text-sage-light">•</span>
+                <span>Anniversaries</span>
+                <span class="text-sage-light">•</span>
+                <span>Corporate</span>
+            </div>
+
+            <a href="#contact" class="inline-block border border-stone-50 px-8 py-4 text-xs uppercase tracking-widest hover:bg-stone-50 hover:text-stone-900 transition-colors duration-300">Inquire Now</a>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="py-32 bg-stone-50 px-6 md:px-12 text-center">
+        <div class="max-w-4xl mx-auto reveal">
+            <span class="text-sage text-xs font-semibold tracking-[0.2em] uppercase mb-12 block">Guest Impressions</span>
+            
+            <div class="relative">
+                <i class="fa-solid fa-quote-left text-4xl text-stone-200 absolute -top-8 -left-4 md:-left-12"></i>
+                <h3 class="text-2xl md:text-4xl font-serif leading-relaxed text-stone-800 mb-8 italic">
+                    "Such a peaceful and refreshing environment. The gardens are beautiful and well maintained. It's the perfect spot to relax after visiting Banjhakri Falls. Exceptional hospitality."
+                </h3>
+                <p class="uppercase tracking-widest text-xs font-semibold text-stone-500">— Rahul T., Guest</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Map -->
+    <section class="bg-stone-50 pb-32 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto reveal">
+            <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                
+                <!-- Text Area -->
+                <div class="w-full md:w-1/3 text-center md:text-left">
+                    <span class="text-sage text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">Directions</span>
+                    <h2 class="text-4xl md:text-5xl font-serif text-stone-900 mb-6">Visit Us</h2>
+                    <div class="hairline w-12 mx-auto md:mx-0 mb-6 bg-stone-900"></div>
+                    <p class="font-light text-stone-600 leading-relaxed mb-8 text-sm md:text-base">
+                        Nestled near the beautiful Banjhakri Falls. We invite you to escape the city and immerse yourself in the serene environment of Luing Garden.
+                    </p>
+                    <div class="space-y-1 text-sm font-medium tracking-wide uppercase text-stone-800">
+                        <p>Resithang, Ranka–Sichey Road</p>
+                        <p>Gangtok, Sikkim</p>
+                    </div>
+                </div>
+
+                <!-- Map Area -->
+                <div class="w-full md:w-2/3">
+                    <div class="w-full h-[350px] md:h-[450px] grayscale-[30%] hover:grayscale-0 transition-all duration-700 shadow-sm border border-stone-200">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3543.8539966584553!2d88.5968104!3d27.3490327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e6a50a903340c9%3A0xeb81f5de11f23723!2sLuing%20Garden!5e0!3m2!1sen!2sin!4v1780729891318!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-stone-900 text-stone-400 pt-32 pb-12 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 mb-24">
+            
+            <!-- Brand -->
+            <div class="md:col-span-4">
+                <h2 class="font-serif text-3xl text-stone-50 tracking-widest uppercase mb-6">Luing.</h2>
+                <p class="font-light text-sm leading-relaxed mb-8 max-w-xs">
+                    A premier dining and event destination surrounded by the natural beauty of Sikkim.
+                </p>
+                <div class="flex space-x-6 text-stone-50">
+                    <a href="#" class="hover:text-sage transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    <a href="#" class="hover:text-sage transition-colors"><i class="fa-brands fa-facebook-f text-xl"></i></a>
+                </div>
+            </div>
+
+            <!-- Contact Details -->
+            <div class="md:col-span-4">
+                <h4 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-50 mb-6">Location</h4>
+                <ul class="space-y-4 font-light text-sm">
+                    <li>Resithang, Ranka–Sichey Road</li>
+                    <li>Gangtok, Sikkim</li>
+                    <li class="text-sage">Near Banjhakri Falls</li>
+                    <li class="pt-4"><a href="mailto:reserve@luinggarden.com" class="hover:text-stone-50 transition-colors">reserve@luinggarden.com</a></li>
+                    <li>+91 98765 43210</li>
+                </ul>
+            </div>
+
+            <!-- Hours -->
+            <div class="md:col-span-4">
+                <h4 class="text-xs font-semibold uppercase tracking-[0.2em] text-stone-50 mb-6">Hours</h4>
+                <ul class="space-y-4 font-light text-sm">
+                    <li class="flex justify-between border-b border-stone-800 pb-2">
+                        <span>Mon - Fri</span>
+                        <span>10:00 - 21:00</span>
+                    </li>
+                    <li class="flex justify-between border-b border-stone-800 pb-2">
+                        <span>Sat - Sun</span>
+                        <span>09:00 - 22:00</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="max-w-7xl mx-auto border-t border-stone-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs tracking-widest uppercase font-light">
+            <p>&copy; 2026 Luing Garden. All Rights Reserved.</p>
+            <p class="mt-4 md:mt-0 text-stone-600">Minimal & Premium</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Action Button -->
+    <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white px-5 py-4 md:py-3 rounded-full shadow-[0_10px_40px_rgba(37,211,102,0.4)] flex items-center gap-3 hover:-translate-y-1 hover:shadow-[0_15px_50px_rgba(37,211,102,0.6)] transition-all duration-300">
+        <i class="fa-brands fa-whatsapp text-2xl md:text-xl"></i>
+        <span class="font-sans text-xs uppercase tracking-widest font-semibold hidden md:inline">Inquire</span>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Navbar style on scroll (Blend mode to solid)
+            const navbar = document.getElementById('navbar');
+            const navLinks = navbar.querySelectorAll('a');
+            const menuBtnSpans = document.querySelectorAll('#mobile-menu-btn span');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    // Solid background
+                    navbar.classList.remove('mix-blend-difference', 'text-white', 'pt-6', 'pb-6');
+                    navbar.classList.add('nav-scrolled', 'text-stone-900', 'shadow-sm');
+                } else {
+                    // Transparent blend mode
+                    navbar.classList.add('mix-blend-difference', 'text-white', 'pt-6', 'pb-6');
+                    navbar.classList.remove('nav-scrolled', 'text-stone-900', 'shadow-sm');
+                }
+            });
+
+            // 2. Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            let menuOpen = false;
+
+            btn.addEventListener('click', () => {
+                menuOpen = !menuOpen;
+                if (menuOpen) {
+                    menu.classList.remove('opacity-0', 'pointer-events-none');
+                    menu.classList.add('opacity-100', 'pointer-events-auto');
+                    // Change lines to X manually or just rely on color change
+                    navbar.classList.remove('mix-blend-difference', 'text-white');
+                    navbar.classList.add('text-stone-900');
+                } else {
+                    menu.classList.add('opacity-0', 'pointer-events-none');
+                    menu.classList.remove('opacity-100', 'pointer-events-auto');
+                    if (window.scrollY <= 50) {
+                        navbar.classList.add('mix-blend-difference', 'text-white');
+                        navbar.classList.remove('text-stone-900');
+                    }
+                }
+            });
+
+            // Close mobile menu on link click
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menuOpen = false;
+                    menu.classList.add('opacity-0', 'pointer-events-none');
+                    menu.classList.remove('opacity-100', 'pointer-events-auto');
+                    if (window.scrollY <= 50) {
+                        navbar.classList.add('mix-blend-difference', 'text-white');
+                    }
+                });
+            });
+
+            // 3. Scroll Reveal Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Small timeout creates a cascading effect if multiple items enter at once
+                        setTimeout(() => {
+                            entry.target.classList.add('active');
+                        }, 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal:not(.active)');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
